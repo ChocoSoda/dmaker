@@ -1,0 +1,4 @@
+Spring:
+  h2:
+    console:
+      enabled: true
