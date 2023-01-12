@@ -1,7 +1,9 @@
 package com.practice.programming.dmaker.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.practice.programming.dmaker.Type.DeveloperLevel;
 import com.practice.programming.dmaker.Type.DeveloperSkillType;
+import com.practice.programming.dmaker.entity.Developer;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -24,6 +26,7 @@ public class CreateDeveloper {
 
         @NotNull
         @Size(min = 3, max = 50, message = "memberId size must 3~50")
+        @JsonProperty("memberId")
         private String memberId;
         @NotNull
         @Size(min = 3, max = 20, message = "memberId size must 3~20")
@@ -42,5 +45,14 @@ public class CreateDeveloper {
         private DeveloperSkillType developerSkillType;
         private Integer experienceYears;
         private String memberId;
+
+        public static Response fromEntity(Developer developer){
+            return Response.builder()
+                    .developerLevel(developer.getDeveloperLevel())
+                    .developerSkillType(developer.getDeveloperSkillType())
+                    .experienceYears(developer.getExperienceYears())
+                    .memberId(developer.getMemberId())
+                    .build();
+        }
     }
 }
