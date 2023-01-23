@@ -1,7 +1,7 @@
 package com.practice.programming.dmaker.service;
 
 import com.practice.programming.dmaker.Type.DeveloperLevel;
-import com.practice.programming.dmaker.dto.CreateDeveloper;
+import com.practice.programming.dmaker.dto.*;
 import com.practice.programming.dmaker.entity.Developer;
 import com.practice.programming.dmaker.exception.DMakerException;
 import com.practice.programming.dmaker.repository.DeveloperRepository;
@@ -10,8 +10,10 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import static com.practice.programming.dmaker.exception.DMakerErrorCode.DUPLICATED_MEMBER_ID;
-import static com.practice.programming.dmaker.exception.DMakerErrorCode.LEVEL_EXPERIENCE_YEARS_NOT_MATCHED;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.practice.programming.dmaker.exception.DMakerErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +28,7 @@ public class DMakerService {
                     .developerLevel(request.getDeveloperLevel())
                     .developerSkillType(request.getDeveloperSkillType())
                     .experienceYears(request.getExperienceYears())
+                    .memberId(request.getMemberId())
                     .name(request.getName())
                     .age(request.getAge())
                     .build();
@@ -51,5 +54,17 @@ public class DMakerService {
         developerRepository.findByMemberId(request.getMemberId()).ifPresent(
                 developer -> {throw new DMakerException(DUPLICATED_MEMBER_ID);
                 });
+    }
+
+    public List<DeveloperDto> getAllDevelopers() {
+        return developerRepository.findAll()
+                .stream().map(DeveloperDto::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    public DeveloperDetailDto getDeveloperDetail(String memberId) {
+        return developerRepository.findByMemberId(memberId)
+                .map(DeveloperDetailDto::fromEntity)
+                .orElseThrow(()-> new DMakerException(NO_DEVELOPER));
     }
 }

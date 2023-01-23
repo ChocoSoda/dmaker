@@ -1,6 +1,6 @@
 package com.practice.programming.dmaker.controller;
 
-import com.practice.programming.dmaker.dto.CreateDeveloper;
+import com.practice.programming.dmaker.dto.*;
 import com.practice.programming.dmaker.service.DMakerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,13 +16,23 @@ import java.util.List;
 public class DmakerController {
     private final DMakerService dMakerService;
     @GetMapping("/developers")
-    public List<String> getAllDevelopers(){
+    public List<DeveloperDto> getAllDevelopers(){
         //GET /developers HTTP/1.1
         log.info("GET /developers HTTP/1.1");
 
-        return Arrays.asList("Snow", "Elsa", "Olaf");
+        return dMakerService.getAllDevelopers();
         // return을 통해 결과값을 받는 것.
     }
+    @GetMapping("/developers/{memberId}")
+    public DeveloperDetailDto getDevelopeDetail(
+            @PathVariable String memberId
+    ) {
+        log.info("GET /developers HTTP/1.1");
+
+        return dMakerService.getDeveloperDetail(memberId);
+    }
+        // return을 통해 결과값을 받는 것.
+
     @PostMapping("/create-developer")
     public CreateDeveloper.Response createDevelopers(
             @Valid @RequestBody CreateDeveloper.Request request
