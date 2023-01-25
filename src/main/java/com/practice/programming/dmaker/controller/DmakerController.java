@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -24,7 +23,7 @@ public class DmakerController {
         // return을 통해 결과값을 받는 것.
     }
     @GetMapping("/developers/{memberId}")
-    public DeveloperDetailDto getDevelopeDetail(
+    public DeveloperDetailDto getDeveloperDetail(
             @PathVariable String memberId
     ) {
         log.info("GET /developers HTTP/1.1");
@@ -40,5 +39,14 @@ public class DmakerController {
         log.info("request : {}", request);
 
         return dMakerService.createDeveloper(request);
+    }
+    @PutMapping("/developers/{memberId}")
+    public DeveloperDetailDto editDeveloper(
+            @PathVariable String memberId,
+            @Valid @RequestBody EditDeveloper.Request request
+    ) {
+        log.info("GET /developers HTTP/1.1");
+
+        return dMakerService.editDeveloper(memberId, request);
     }
 }
