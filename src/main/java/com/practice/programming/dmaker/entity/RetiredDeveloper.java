@@ -1,8 +1,5 @@
 package com.practice.programming.dmaker.entity;
 
-import com.practice.programming.dmaker.type.DeveloperLevel;
-import com.practice.programming.dmaker.type.DeveloperSkillType;
-import com.practice.programming.dmaker.code.StatusCode;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -21,23 +18,15 @@ import java.time.LocalDateTime;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 // 생성 시기, 최종 수정 시기를 자동으로 기입하기 위해 필요한 Annotation
-public class Developer {
+public class RetiredDeveloper {
+    // 이름이나 나이를 지우고 상태값을 삭제 상태로 바꾸고
+    // retiredDeveloper에 분리 보관하는 방식을 채용
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
-    // 위 세 줄은 Developer를 활성화(빨간줄 제거)시키기 위해 입력.
-    @Enumerated(EnumType.STRING)
-    private DeveloperLevel developerLevel; //developer 레벨 만들기
-    @Enumerated(EnumType.STRING)
-    private DeveloperSkillType developerSkillType; //developer Skill Type 만들기
 
-    private Integer experienceYears;
     private String memberId;
     private String name;
-    private Integer age;
-
-    @Enumerated(EnumType.STRING)
-    private StatusCode statusCode;
 
     @CreatedDate
     private LocalDateTime creatdeAt;

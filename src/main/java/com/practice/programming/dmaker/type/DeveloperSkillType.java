@@ -1,4 +1,4 @@
-package com.practice.programming.dmaker.Type;
+package com.practice.programming.dmaker.type;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

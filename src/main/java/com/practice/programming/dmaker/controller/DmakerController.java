@@ -19,7 +19,7 @@ public class DmakerController {
         //GET /developers HTTP/1.1
         log.info("GET /developers HTTP/1.1");
 
-        return dMakerService.getAllDevelopers();
+        return dMakerService.getAllEmployedDevelopers();
         // return을 통해 결과값을 받는 것.
     }
     @GetMapping("/developers/{memberId}")
@@ -48,5 +48,11 @@ public class DmakerController {
         log.info("GET /developers HTTP/1.1");
 
         return dMakerService.editDeveloper(memberId, request);
+    }
+    @DeleteMapping("/developers/{memberId}")
+    public DeveloperDetailDto deleteDeveloper(
+            @PathVariable String memberId
+    ){
+        return dMakerService.deleteDeveloper(memberId);
     }
 }

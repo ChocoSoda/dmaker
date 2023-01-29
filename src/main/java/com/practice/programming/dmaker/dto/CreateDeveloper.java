@@ -1,8 +1,9 @@
 package com.practice.programming.dmaker.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.practice.programming.dmaker.Type.DeveloperLevel;
-import com.practice.programming.dmaker.Type.DeveloperSkillType;
+import com.practice.programming.dmaker.type.DeveloperLevel;
+import com.practice.programming.dmaker.type.DeveloperSkillType;
+import com.practice.programming.dmaker.code.StatusCode;
 import com.practice.programming.dmaker.entity.Developer;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -51,6 +52,7 @@ public class CreateDeveloper {
                     .developerLevel(developer.getDeveloperLevel())
                     .developerSkillType(developer.getDeveloperSkillType())
                     .experienceYears(developer.getExperienceYears())
+
                     .memberId(developer.getMemberId())
                     .build();
         }

@@ -1,7 +1,8 @@
 package com.practice.programming.dmaker.dto;
 
-import com.practice.programming.dmaker.Type.DeveloperLevel;
-import com.practice.programming.dmaker.Type.DeveloperSkillType;
+import com.practice.programming.dmaker.code.StatusCode;
+import com.practice.programming.dmaker.type.DeveloperLevel;
+import com.practice.programming.dmaker.type.DeveloperSkillType;
 import com.practice.programming.dmaker.entity.Developer;
 import lombok.*;
 
@@ -16,6 +17,7 @@ public class DeveloperDetailDto {
 
     private Integer experienceYears;
     private String memberId;
+    private StatusCode statusCode;
     private String name;
     private Integer age;
 
@@ -25,6 +27,7 @@ public class DeveloperDetailDto {
                 .developerSkillType(developer.getDeveloperSkillType())
                 .experienceYears(developer.getExperienceYears())
                 .age(developer.getAge())
+                .statusCode(developer.getStatusCode())
                 .name(developer.getName())
                 .memberId(developer.getMemberId())
                 .build();
